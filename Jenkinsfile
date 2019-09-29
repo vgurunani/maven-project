@@ -6,7 +6,7 @@ pipeline
 	{
 	
 		stage ('SCM Checkout') {
-		git 'https://github.com/vgurunani/maven-project.git'
+			git 'https://github.com/vgurunani/maven-project.git'
 		}
 	}	
 	{
@@ -14,10 +14,19 @@ pipeline
 		
 		steps{
 			withMaven(maven: 'LocalMaven') 
-			{
-			sh 'mvn test'
+				{
+				sh 'mvn test'
+				}
 			}
 		}
-	}
+		stage ('code build') {
+		
+		steps{
+			withMaven(maven: 'LocalMaven')
+				{
+				sh 'mvn install'
+				}
+			}
+		}
 	}
 }
