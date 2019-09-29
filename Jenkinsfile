@@ -10,7 +10,7 @@ pipeline
 		}
 	}	
 	{
-		stage ('Code Test') {
+		stage ('code test') {
 		
 		steps{
 			withMaven(maven: 'LocalMaven') 
@@ -25,6 +25,17 @@ pipeline
 			withMaven(maven: 'LocalMaven')
 				{
 				sh 'mvn install'
+				}
+			}
+		}
+		
+
+		stage('deploy to tomcat'){
+
+		steps 
+		 {
+		  sshagent (['172.31.37.124']) {
+			sh 'scp -o StrictHostKeyChecking=no **/*.war ec2-user@172.31.37.124:/var/lib/tomcat/webapps'
 				}
 			}
 		}
