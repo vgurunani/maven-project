@@ -12,10 +12,10 @@ pipeline
 	
 	{
       stage ('build and sonar')
-      {
+      { 
         steps
         {
-          withSonarQubeEnv('jenkinstosonar')
+          withSonarQubeEnv(credentialsId: 'jenkinstosonar' installationName: 'mySonarQube')
           {
             withMaven(maven: 'LocalMaven')
             {
