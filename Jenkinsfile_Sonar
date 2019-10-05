@@ -9,7 +9,7 @@ pipeline
         git 'https://github.com/vgurunani/maven-project.git'
       }
     }  
-      stage (build and sonar)
+      stage ('build and sonar')
       {
         steps
         {
