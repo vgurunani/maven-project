@@ -1,15 +1,16 @@
 pipeline
 {
   agent any
-  {
+  
     stages
     {
       stage ('SCM Checkout')
       {
         git 'https://github.com/vgurunani/maven-project.git'
       }
-    } 
-    {
+    }  
+	
+	{
       stage ('build and sonar')
       {
         steps
@@ -22,7 +23,6 @@ pipeline
             }  
           }
         }
-      }
-    }
-  }
+		}
+	 }
 }
