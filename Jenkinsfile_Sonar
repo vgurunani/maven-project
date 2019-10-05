@@ -4,7 +4,23 @@ pipeline
   {
     stages
     {
-      stage 
+      stage ('SCM Checkout')
+      {
+        git 'https://github.com/vgurunani/maven-project.git'
+      }
     }  
+      stage (build and sonar)
+      {
+        steps
+        {
+          withSonarQubeEnv(credentialsId: 'sonar')
+          {
+            withMaven(maven: 'LocalMaven')
+            {
+              sh 'mvn clean package sonar:sonar'
+            }  
+          }
+        }
+      }
   }
 }
